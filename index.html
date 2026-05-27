@@ -690,6 +690,125 @@
       border: 0;
     }
 
+    .gallery-shell {
+      position: relative;
+      width: min(760px, 100%);
+      margin: 0 auto;
+      padding: clamp(12px, 2.6vw, 18px);
+      border: 1px solid rgba(201, 154, 67, .42);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(34, 7, 15, .96), rgba(124, 17, 39, .95)),
+        radial-gradient(circle at 18% 12%, rgba(239, 210, 139, .16), transparent 34%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .gallery-shell::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(239, 210, 139, .24);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .gallery-slider {
+      position: relative;
+      z-index: 1;
+      width: min(540px, 100%);
+      aspect-ratio: 2 / 3;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 6px;
+      background: #16050b;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .28);
+      touch-action: pan-y;
+    }
+
+    .gallery-track {
+      display: flex;
+      height: 100%;
+      transition: transform .58s cubic-bezier(.2, .8, .2, 1);
+      will-change: transform;
+    }
+
+    .gallery-slide {
+      flex: 0 0 100%;
+      min-width: 0;
+      height: 100%;
+      margin: 0;
+      background: #16050b;
+    }
+
+    .gallery-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid rgba(239, 210, 139, .56);
+      border-radius: 50%;
+      color: var(--ivory);
+      background: rgba(34, 7, 15, .64);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .28);
+      cursor: pointer;
+      font-size: 2rem;
+      line-height: 1;
+      transform: translateY(-50%);
+      transition: background .2s ease, transform .2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .gallery-nav:hover {
+      background: rgba(124, 17, 39, .9);
+      transform: translateY(-50%) scale(1.04);
+    }
+
+    .gallery-prev {
+      left: 12px;
+    }
+
+    .gallery-next {
+      right: 12px;
+    }
+
+    .gallery-dots {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .gallery-dot {
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      border: 1px solid rgba(239, 210, 139, .78);
+      border-radius: 50%;
+      background: rgba(255, 247, 232, .18);
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .gallery-dot.is-active {
+      background: var(--gold-soft);
+      transform: scale(1.35);
+    }
+
     .gift-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -903,6 +1022,24 @@
       .map-frame iframe {
         min-height: 300px;
       }
+
+      .gallery-shell {
+        padding: 10px;
+      }
+
+      .gallery-nav {
+        width: 38px;
+        height: 38px;
+        font-size: 1.7rem;
+      }
+
+      .gallery-prev {
+        left: 8px;
+      }
+
+      .gallery-next {
+        right: 8px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1022,6 +1159,42 @@
             <h3>Resepsi</h3>
             <p><strong>Sabtu, 6 Juni 2026</strong><br>Jam 13:30 WIB</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galeri">
+      <div class="section-inner">
+        <div class="section-title" data-reveal>
+          <span>Galeri</span>
+          <h2>Momen kami</h2>
+        </div>
+        <div class="gallery-shell" data-reveal>
+          <div class="gallery-slider" data-gallery aria-label="Galeri foto Kautsar dan Reygita">
+            <div class="gallery-track">
+              <figure class="gallery-slide">
+                <img src="assets/gallery/galeri-1.jpg" alt="Foto Kautsar dan Reygita 1" loading="lazy" draggable="false">
+              </figure>
+              <figure class="gallery-slide">
+                <img src="assets/gallery/galeri-2.jpg" alt="Foto Kautsar dan Reygita 2" loading="lazy" draggable="false">
+              </figure>
+              <figure class="gallery-slide">
+                <img src="assets/gallery/galeri-3.jpg" alt="Foto Kautsar dan Reygita 3" loading="lazy" draggable="false">
+              </figure>
+              <figure class="gallery-slide">
+                <img src="assets/gallery/galeri-4.jpg" alt="Foto Kautsar dan Reygita 4" loading="lazy" draggable="false">
+              </figure>
+              <figure class="gallery-slide">
+                <img src="assets/gallery/galeri-5.jpg" alt="Foto Kautsar dan Reygita 5" loading="lazy" draggable="false">
+              </figure>
+              <figure class="gallery-slide">
+                <img src="assets/gallery/galeri-6.jpg" alt="Foto Kautsar dan Reygita 6" loading="lazy" draggable="false">
+              </figure>
+            </div>
+            <button class="gallery-nav gallery-prev" type="button" data-gallery-prev aria-label="Foto sebelumnya">&lsaquo;</button>
+            <button class="gallery-nav gallery-next" type="button" data-gallery-next aria-label="Foto berikutnya">&rsaquo;</button>
+          </div>
+          <div class="gallery-dots" data-gallery-dots aria-label="Pilih foto galeri"></div>
         </div>
       </div>
     </section>
@@ -1216,6 +1389,89 @@
         }, 1700);
       });
     });
+
+    const gallery = document.querySelector("[data-gallery]");
+    if (gallery) {
+      const galleryTrack = gallery.querySelector(".gallery-track");
+      const gallerySlides = Array.from(gallery.querySelectorAll(".gallery-slide"));
+      const galleryPrev = gallery.querySelector("[data-gallery-prev]");
+      const galleryNext = gallery.querySelector("[data-gallery-next]");
+      const galleryDotsWrap = document.querySelector("[data-gallery-dots]");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let galleryIndex = 0;
+      let galleryTimer = null;
+      let touchStartX = 0;
+
+      const galleryDots = gallerySlides.map((slide, index) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "gallery-dot";
+        dot.setAttribute("aria-label", `Lihat foto ${index + 1}`);
+        dot.addEventListener("click", () => {
+          setGallerySlide(index);
+          restartGallery();
+        });
+        galleryDotsWrap.appendChild(dot);
+        return dot;
+      });
+
+      function setGallerySlide(index) {
+        galleryIndex = (index + gallerySlides.length) % gallerySlides.length;
+        galleryTrack.style.transform = `translateX(${-galleryIndex * 100}%)`;
+        galleryDots.forEach((dot, dotIndex) => {
+          dot.classList.toggle("is-active", dotIndex === galleryIndex);
+        });
+      }
+
+      function moveGallery(step) {
+        setGallerySlide(galleryIndex + step);
+      }
+
+      function stopGallery() {
+        if (galleryTimer) {
+          clearInterval(galleryTimer);
+          galleryTimer = null;
+        }
+      }
+
+      function startGallery() {
+        if (reduceMotion.matches || galleryTimer) return;
+        galleryTimer = setInterval(() => moveGallery(1), 4600);
+      }
+
+      function restartGallery() {
+        stopGallery();
+        startGallery();
+      }
+
+      galleryPrev.addEventListener("click", () => {
+        moveGallery(-1);
+        restartGallery();
+      });
+
+      galleryNext.addEventListener("click", () => {
+        moveGallery(1);
+        restartGallery();
+      });
+
+      gallery.addEventListener("mouseenter", stopGallery);
+      gallery.addEventListener("mouseleave", startGallery);
+      gallery.addEventListener("touchstart", (event) => {
+        touchStartX = event.changedTouches[0].clientX;
+        stopGallery();
+      }, { passive: true });
+
+      gallery.addEventListener("touchend", (event) => {
+        const deltaX = event.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(deltaX) > 44) {
+          moveGallery(deltaX > 0 ? -1 : 1);
+        }
+        startGallery();
+      }, { passive: true });
+
+      setGallerySlide(0);
+      startGallery();
+    }
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
